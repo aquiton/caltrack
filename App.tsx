@@ -2,7 +2,7 @@ import { useState } from "react";
 import { Button, StyleSheet, Text, View } from "react-native";
 import Constants from "expo-constants";
 
-const API_URL = Constants.manifest2.extra.API_URL;
+const { API_URL } = Constants.expoConfig!.extra!;
 
 interface MealInfo {
   calories: number;
@@ -13,9 +13,8 @@ interface MealInfo {
 }
 
 const getMeals = async () => {
-  console.log("hello");
   try {
-    const res = await fetch(`${API_URL}/api/meals`);
+    const res = await fetch(`${API_URL}/api/hello`);
     if (!res.ok) {
       throw new Error(`Server error: ${res.status}`);
     }
@@ -37,7 +36,7 @@ export default function App() {
     <View style={styles.container}>
       <View
         style={{
-          display: mealInfo != null ? "flex" : "none",
+          display: mealInfo != null ? "flex" : "flex",
           flex: 1,
           // backgroundColor: "#eb4034",
           flexDirection: "column",
