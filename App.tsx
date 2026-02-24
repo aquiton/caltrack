@@ -1,8 +1,22 @@
-import { useState } from "react";
-import { Button, StyleSheet, Text, View } from "react-native";
+import React from "react";
+import { Text, View } from "react-native";
 import Constants from "expo-constants";
+import { NavigationContainer } from "@react-navigation/native";
+import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
+import { Ionicons } from "@expo/vector-icons";
+import { Entypo } from "@expo/vector-icons";
+import { TrackScreen } from "./tabs/TrackScreen";
 
-const { API_URL } = Constants.expoConfig!.extra!;
+// const { API_URL } = Constants.expoConfig!.extra!;
+
+type TabParamList = {
+  Home: undefined;
+  Food: undefined;
+  Meals: undefined;
+  Settings: undefined;
+};
+
+const Tab = createBottomTabNavigator<TabParamList>();
 
 interface MealInfo {
   calories: number;
@@ -12,56 +26,106 @@ interface MealInfo {
   user_id: string;
 }
 
-const getMeals = async () => {
-  try {
-    const res = await fetch(`${API_URL}/api/hello`);
-    if (!res.ok) {
-      throw new Error(`Server error: ${res.status}`);
-    }
-    const data = await res.json();
+// const getMeals = async () => {
+//   try {
+//     const res = await fetch(`${API_URL}/api/hello`);
+//     if (!res.ok) {
+//       throw new Error(`Server error: ${res.status}`);
+//     }
+//     const data = await res.json();
 
-    return data;
-  } catch (error) {
-    console.error("Error fetching meals: ", error);
-  }
+//     return data;
+//   } catch (error) {
+//     console.error("Error fetching meals: ", error);
+//   }
+// };
+
+const HomeScreen = () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+        backgroundColor: "#1C1C23",
+      }}
+    >
+      <Text>Home</Text>
+    </View>
+  );
+};
+
+const MealsScreen = () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text>Recipes</Text>
+    </View>
+  );
+};
+
+const ProfileScreen = () => {
+  return (
+    <View
+      style={{
+        flex: 1,
+        justifyContent: "center",
+        alignItems: "center",
+      }}
+    >
+      <Text>Profile</Text>
+    </View>
+  );
 };
 
 export default function App() {
-  const [mealInfo, setMealInfo] = useState<MealInfo | null>(null);
-  const handleGetMeals = () => {
-    getMeals().then((meal: MealInfo) => setMealInfo(meal));
-  };
-
   return (
-    <View style={styles.container}>
-      <View
-        style={{
-          display: mealInfo != null ? "flex" : "flex",
-          flex: 1,
-          // backgroundColor: "#eb4034",
-          flexDirection: "column",
-          justifyContent: "flex-end",
-        }}
+    <NavigationContainer>
+      <Tab.Navigator
+        screenOptions={({ route }) => ({
+          headerShown: false,
+          tabBarIcon: ({ color, size }: { color: string; size: number }) => {
+            const icons: Record<
+              keyof TabParamList,
+              keyof typeof Ionicons.glyphMap
+            > = {
+              Home: "home",
+              Food: "search",
+              Meals: "bar-chart",
+              Settings: "settings-outline",
+            };
+            return (
+              <Ionicons
+                name={icons[route.name as keyof TabParamList]}
+                size={size}
+                color={color}
+              />
+            );
+          },
+          tabBarActiveTintColor: "#4f8ef7",
+          tabBarInactiveTintColor: "gray",
+          tabBarStyle: {
+            paddingTop: 10,
+            justifyContent: "center",
+            borderTopWidth: 0,
+            elevation: 0,
+            backgroundColor: "#1e2230",
+          },
+          tabBarItemStyle: {
+            justifyContent: "center",
+          },
+        })}
       >
-        <Text>Meal Name: {mealInfo?.name}</Text>
-        <Text>Calories: {mealInfo?.calories}</Text>
-      </View>
-      <View
-        style={{
-          flex: 1,
-        }}
-      >
-        <Button onPress={handleGetMeals} title="Click Me for Robux!" />
-      </View>
-    </View>
+        <Tab.Screen name="Home" component={HomeScreen} />
+        <Tab.Screen name="Food" component={TrackScreen} />
+        <Tab.Screen name="Meals" component={MealsScreen} />
+        <Tab.Screen name="Settings" component={ProfileScreen} />
+      </Tab.Navigator>
+    </NavigationContainer>
   );
 }
-
-const styles = StyleSheet.create({
-  container: {
-    flex: 1,
-    backgroundColor: "#fff",
-    alignItems: "center",
-    justifyContent: "center",
-  },
-});
