@@ -6,6 +6,7 @@ import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import { Ionicons } from "@expo/vector-icons";
 import { Entypo } from "@expo/vector-icons";
 import { TrackScreen } from "./tabs/TrackScreen";
+import { HomeScreen } from "./tabs/HomeScreen";
 
 // const { API_URL } = Constants.expoConfig!.extra!;
 
@@ -39,21 +40,6 @@ interface MealInfo {
 //     console.error("Error fetching meals: ", error);
 //   }
 // };
-
-const HomeScreen = () => {
-  return (
-    <View
-      style={{
-        flex: 1,
-        justifyContent: "center",
-        alignItems: "center",
-        backgroundColor: "#1C1C23",
-      }}
-    >
-      <Text>Home</Text>
-    </View>
-  );
-};
 
 const MealsScreen = () => {
   return (
