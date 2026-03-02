@@ -1,9 +1,8 @@
 import { Ionicons } from "@expo/vector-icons";
-import { useRef } from "react";
+import { useRef, useState } from "react";
 import {
   View,
   Text,
-  Button,
   StyleSheet,
   TouchableOpacity,
   TextInput,
@@ -13,6 +12,7 @@ import {
 
 export const TrackScreen = () => {
   const searchRef = useRef<TextInput>(null);
+  const [isVisible, setVisible] = useState(false);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -36,7 +36,10 @@ export const TrackScreen = () => {
             />
           </TouchableOpacity>
           <View style={styles.horizontalButtonContainer}>
-            <TouchableOpacity style={styles.horizontalButton}>
+            <TouchableOpacity
+              style={styles.horizontalButton}
+              onPress={() => setVisible(true)}
+            >
               <Ionicons name={"pencil-outline"} size={34} color={"#f5a623"} />
               <Text style={styles.horizontalButtonText}>Manual</Text>
               <Text style={styles.horizontalButtonSubText}>Enter details</Text>
@@ -48,7 +51,6 @@ export const TrackScreen = () => {
             </TouchableOpacity>
           </View>
           <TouchableOpacity style={styles.mealsButton}>
-            <Ionicons name={"layers-outline"} size={34} color={"#6b7494"} />
             <View>
               <Text style={styles.mealsButtonText}>My meals</Text>
               <Text style={styles.mealButtonSubText}>
@@ -57,12 +59,54 @@ export const TrackScreen = () => {
             </View>
           </TouchableOpacity>
         </View>
+        {isVisible && (
+          <View
+            style={{
+              position: "absolute",
+              top: 0,
+              left: 0,
+              right: 0,
+              bottom: 0,
+              zIndex: 999,
+            }}
+          >
+            <View
+              style={{
+                backgroundColor: "white",
+                paddingTop: 80,
+                borderRadius: 10,
+                width: "100%",
+                height: "100%",
+              }}
+            >
+              <Ionicons
+                name={"arrow-back-outline"}
+                size={34}
+                color={"#6b7494"}
+              />
+              <Text>Overlay content</Text>
+            </View>
+          </View>
+        )}
       </View>
     </TouchableWithoutFeedback>
   );
 };
 
 const styles = StyleSheet.create({
+  container: { flex: 1, justifyContent: "center", alignItems: "center" },
+  backdrop: {
+    flex: 1,
+    backgroundColor: "rgba(0,0,0,0.5)", // semi-transparent overlay
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  modalBox: {
+    backgroundColor: "white",
+    padding: 24,
+    borderRadius: 12,
+    width: "80%",
+  },
   mainContainer: {
     backgroundColor: "#161920",
     paddingTop: 80,

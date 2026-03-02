@@ -104,7 +104,7 @@ export const CalorieRing = ({
           {displayCount.toLocaleString()}
         </Text>
         <Text style={[styles.label, isOver && styles.labelOver]}>
-          {isOver ? "KCAL OVER" : "KCAL LEFT"}
+          {isOver ? "CAL OVER" : "CAL LEFT"}
         </Text>
       </View>
     </View>
