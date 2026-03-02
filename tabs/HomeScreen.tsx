@@ -16,12 +16,14 @@ export const HomeScreen = () => {
         <View style={styles.macroPill}>
           <Text style={styles.macroProteinValue}>142g</Text>
           <Text style={styles.macroProteinSubTitle}>PROTEIN</Text>
-          <View style={styles.macroProteinBar} />
+          <View>
+            <View style={styles.macroProteinBar} />
+            <View style={styles.macroProteinTrack} />
+          </View>
         </View>
         <View style={styles.macroPill}>
           <Text>186g</Text>
           <Text>CARBS</Text>
-          <View />
         </View>
         <View style={styles.macroPill}>
           <Text>48g</Text>
@@ -70,6 +72,7 @@ const styles = StyleSheet.create({
     padding: 16,
     flex: 1,
     gap: 4,
+    position: "relative",
   },
   macroProteinValue: {
     color: "#4f8ef7",
@@ -79,12 +82,20 @@ const styles = StyleSheet.create({
   macroProteinSubTitle: {
     color: "#3a4060",
   },
-  macroProteinTrack: {},
-  macroProteinBar: {
-    backgroundColor: "#4f8ef7",
-    flex: 1,
+  macroProteinTrack: {
+    backgroundColor: "#3a4060",
+    width: "100%",
     height: 1,
     padding: 2,
     borderRadius: 4,
+    position: "absolute",
+  },
+  macroProteinBar: {
+    backgroundColor: "#4f8ef7",
+    width: "50%",
+    height: 1,
+    padding: 2,
+    borderRadius: 4,
+    zIndex: 10,
   },
 });
