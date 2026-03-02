@@ -3,32 +3,46 @@ import { CalorieRing } from "../components/ui/CalorieRing";
 import { useState } from "react";
 
 export const HomeScreen = () => {
-  const [current, setCurrent] = useState(1);
+  const [current, setCurrent] = useState(500);
 
   return (
-    <View style={styles.mainContainer}>
-      <View style={styles.headerContainer}>
-        <Text style={styles.headerTitle}>Today</Text>
-        <Text style={styles.headerSubTitle}>Tue, Feb 24 . 2,100 cal goal</Text>
+    <View style={layoutStyles.mainContainer}>
+      <View style={headerStyles.container}>
+        <Text style={headerStyles.title}>Today</Text>
+        <Text style={headerStyles.subTitle}>Tue, Feb 24 . 2,100 cal goal</Text>
       </View>
+      {/* <Button title="PRES ME" onPress={() => setCurrent(current + 25)} /> */}
       <CalorieRing current={current} goal={2750} />
-      <View style={styles.macroContainer}>
-        <View style={styles.macroPill}>
-          <Text style={styles.macroProteinValue}>142g</Text>
-          <Text style={styles.macroProteinSubTitle}>PROTEIN</Text>
+      <View style={macroStyles.container}>
+        <View style={macroStyles.pill}>
+          <Text style={[macroStyles.pillValue, macroStyles.protienTextColor]}>
+            142g
+          </Text>
+          <Text style={macroStyles.pillSubTitle}>PROTEIN</Text>
           <View>
-            <View style={styles.macroProteinBar} />
-            <View style={styles.macroProteinTrack} />
+            <View style={[macroStyles.pillBar, macroStyles.protienBGColor]} />
+            <View style={macroStyles.pillTrack} />
           </View>
         </View>
-        <View style={styles.macroPill}>
-          <Text>186g</Text>
-          <Text>CARBS</Text>
+        <View style={macroStyles.pill}>
+          <Text style={[macroStyles.pillValue, macroStyles.carbsTextColor]}>
+            186g
+          </Text>
+          <Text style={macroStyles.pillSubTitle}>CARBS</Text>
+          <View>
+            <View style={[macroStyles.pillBar, macroStyles.carbsBGColor]} />
+            <View style={macroStyles.pillTrack} />
+          </View>
         </View>
-        <View style={styles.macroPill}>
-          <Text>48g</Text>
-          <Text>FATS</Text>
-          <View />
+        <View style={macroStyles.pill}>
+          <Text style={[macroStyles.pillValue, macroStyles.fatsTextColor]}>
+            48g
+          </Text>
+          <Text style={macroStyles.pillSubTitle}>FATS</Text>
+          <View>
+            <View style={[macroStyles.pillBar, macroStyles.fatsBGColor]} />
+            <View style={macroStyles.pillTrack} />
+          </View>
         </View>
       </View>
       <View>
@@ -39,7 +53,8 @@ export const HomeScreen = () => {
   );
 };
 
-const styles = StyleSheet.create({
+// Layout
+const layoutStyles = StyleSheet.create({
   mainContainer: {
     backgroundColor: "#161920",
     paddingTop: 80,
@@ -48,41 +63,49 @@ const styles = StyleSheet.create({
     width: "100%",
     gap: 20,
   },
-  headerContainer: {
+});
+
+// Header
+const headerStyles = StyleSheet.create({
+  container: {
     gap: 4,
   },
-  headerTitle: {
+  title: {
     color: "#e8eaf0",
     fontSize: 32,
     fontWeight: 700,
   },
-  headerSubTitle: {
+  subTitle: {
     color: "#6b7494",
     fontSize: 16,
     fontWeight: 300,
   },
-  macroContainer: {
+});
+
+// Macros
+const macroStyles = StyleSheet.create({
+  container: {
     flexDirection: "row",
     gap: 8,
-    backgroundColor: "",
   },
-  macroPill: {
+  pill: {
     backgroundColor: "#252a3a",
-    borderRadius: 16,
-    padding: 16,
+    borderRadius: 24,
+    paddingHorizontal: 16,
+    paddingVertical: 18,
     flex: 1,
-    gap: 4,
-    position: "relative",
+    gap: 8,
+    borderWidth: 1,
+    borderColor: "#2a3045",
   },
-  macroProteinValue: {
-    color: "#4f8ef7",
+  pillValue: {
     fontWeight: 800,
     fontSize: 18,
   },
-  macroProteinSubTitle: {
-    color: "#3a4060",
+  pillSubTitle: {
+    color: "#6b7494",
   },
-  macroProteinTrack: {
+  pillTrack: {
     backgroundColor: "#3a4060",
     width: "100%",
     height: 1,
@@ -90,12 +113,29 @@ const styles = StyleSheet.create({
     borderRadius: 4,
     position: "absolute",
   },
-  macroProteinBar: {
-    backgroundColor: "#4f8ef7",
+  pillBar: {
     width: "50%",
     height: 1,
     padding: 2,
     borderRadius: 4,
     zIndex: 10,
+  },
+  protienBGColor: {
+    backgroundColor: "#4f8ef7",
+  },
+  carbsBGColor: {
+    backgroundColor: "#f5a623",
+  },
+  fatsBGColor: {
+    backgroundColor: "#2ecc8a",
+  },
+  protienTextColor: {
+    color: "#4f8ef7",
+  },
+  carbsTextColor: {
+    color: "#f5a623",
+  },
+  fatsTextColor: {
+    color: "#2ecc8a",
   },
 });
