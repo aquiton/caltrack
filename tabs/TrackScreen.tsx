@@ -9,10 +9,11 @@ import {
   Keyboard,
   TouchableWithoutFeedback,
 } from "react-native";
+import { ManualEntryModal } from "../modals/ManualEntryModal";
 
 export const TrackScreen = () => {
   const searchRef = useRef<TextInput>(null);
-  const [isVisible, setVisible] = useState(false);
+  const [isManualVisible, setManualVisible] = useState(false);
 
   return (
     <TouchableWithoutFeedback onPress={Keyboard.dismiss}>
@@ -38,7 +39,7 @@ export const TrackScreen = () => {
           <View style={styles.horizontalButtonContainer}>
             <TouchableOpacity
               style={styles.horizontalButton}
-              onPress={() => setVisible(true)}
+              onPress={() => setManualVisible(true)}
             >
               <Ionicons name={"pencil-outline"} size={34} color={"#f5a623"} />
               <Text style={styles.horizontalButtonText}>Manual</Text>
@@ -59,34 +60,8 @@ export const TrackScreen = () => {
             </View>
           </TouchableOpacity>
         </View>
-        {isVisible && (
-          <View
-            style={{
-              position: "absolute",
-              top: 0,
-              left: 0,
-              right: 0,
-              bottom: 0,
-              zIndex: 999,
-            }}
-          >
-            <View
-              style={{
-                backgroundColor: "white",
-                paddingTop: 80,
-                borderRadius: 10,
-                width: "100%",
-                height: "100%",
-              }}
-            >
-              <Ionicons
-                name={"arrow-back-outline"}
-                size={34}
-                color={"#6b7494"}
-              />
-              <Text>Overlay content</Text>
-            </View>
-          </View>
+        {isManualVisible && (
+          <ManualEntryModal setOpen={setManualVisible} open={isManualVisible} />
         )}
       </View>
     </TouchableWithoutFeedback>
