@@ -46,9 +46,16 @@ export const HomeScreen = () => {
         </View>
       </View>
       <View>
-        <Text>MEAL LOG</Text>
+        <Text style={mealLogStyles.title}>MEAL LOG</Text>
       </View>
-      <View></View>
+      <View>
+        <View>
+          <View style={mealLogStyles.breakFastContainer}>
+            <Text style={mealLogStyles.breakFastTitle}>Breakfast</Text>
+            <Text style={mealLogStyles.breakFastSubTitle}>420 kcal</Text>
+          </View>
+        </View>
+      </View>
     </View>
   );
 };
@@ -137,5 +144,25 @@ const macroStyles = StyleSheet.create({
   },
   fatsTextColor: {
     color: "#2ecc8a",
+  },
+});
+
+const mealLogStyles = StyleSheet.create({
+  title: {
+    color: "#6b7494",
+  },
+  breakFastContainer: {
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+  breakFastTitle: {
+    color: "#e8eaf0",
+    fontSize: 18,
+    fontWeight: 600,
+  },
+  breakFastSubTitle: {
+    color: "#6b7494",
+    fontSize: 18,
+    fontWeight: 200,
   },
 });
