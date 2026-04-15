@@ -49,10 +49,14 @@ export const HomeScreen = () => {
         <Text style={mealLogStyles.title}>MEAL LOG</Text>
       </View>
       <View>
-        <View>
-          <View style={mealLogStyles.breakFastContainer}>
-            <Text style={mealLogStyles.breakFastTitle}>Breakfast</Text>
-            <Text style={mealLogStyles.breakFastSubTitle}>420 kcal</Text>
+        <View style={mealLogStyles.container}>
+          <View style={mealLogStyles.mealContainer}>
+            <Text style={mealLogStyles.mealTitle}>Breakfast</Text>
+            <Text style={mealLogStyles.mealSubTitle}>420 cal</Text>
+          </View>
+          <View style={mealLogStyles.mealContainer}>
+            <Text style={mealLogStyles.mealTitle}>Oatmeal w/ Berries</Text>
+            <Text style={mealLogStyles.mealSubTitle}>320 cal</Text>
           </View>
         </View>
       </View>
@@ -151,16 +155,27 @@ const mealLogStyles = StyleSheet.create({
   title: {
     color: "#6b7494",
   },
-  breakFastContainer: {
+  container: {
+    backgroundColor: "#252a3a",
+    borderRadius: 12,
+    borderColor: "#6b7494",
+    borderWidth: 1,
+  },
+  mealContainer: {
     flexDirection: "row",
     justifyContent: "space-between",
+    alignContent: "center",
+    borderBottomWidth: 1 /* need to do inline borderBottomWidth 0 for the last index*/,
+    borderBottomColor: "#6b7494",
+    paddingHorizontal: 16,
+    paddingVertical: 16,
   },
-  breakFastTitle: {
+  mealTitle: {
     color: "#e8eaf0",
     fontSize: 18,
     fontWeight: 600,
   },
-  breakFastSubTitle: {
+  mealSubTitle: {
     color: "#6b7494",
     fontSize: 18,
     fontWeight: 200,
