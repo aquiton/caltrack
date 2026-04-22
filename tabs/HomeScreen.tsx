@@ -1,74 +1,155 @@
-import { View, Text, StyleSheet, Button } from "react-native";
+import { View, Text, StyleSheet, Button, ScrollView } from "react-native";
 import { CalorieRing } from "../components/ui/CalorieRing";
 import { useState } from "react";
+
+const mockData = [
+  {
+    name: "Oatmeal w/ Berries",
+    calories: "320",
+  },
+  {
+    name: "Whopper Meal",
+    calories: "1200",
+  },
+];
 
 export const HomeScreen = () => {
   const [current, setCurrent] = useState(500);
 
   return (
-    <View style={layoutStyles.mainContainer}>
-      <View style={headerStyles.container}>
-        <Text style={headerStyles.title}>Today</Text>
-        <Text style={headerStyles.subTitle}>Tue, Feb 24 . 2,100 cal goal</Text>
-      </View>
-      {/* <Button title="PRES ME" onPress={() => setCurrent(current + 25)} /> */}
-      <CalorieRing current={current} goal={2750} />
-      <View style={macroStyles.container}>
-        <View style={macroStyles.pill}>
-          <Text style={[macroStyles.pillValue, macroStyles.protienTextColor]}>
-            142g
+    <ScrollView style={layoutStyles.root}>
+      <View style={layoutStyles.mainContainer}>
+        <View style={headerStyles.container}>
+          <Text style={headerStyles.title}>Today</Text>
+          <Text style={headerStyles.subTitle}>
+            Tue, Feb 24 . 2,100 cal goal
           </Text>
-          <Text style={macroStyles.pillSubTitle}>PROTEIN</Text>
-          <View>
-            <View style={[macroStyles.pillBar, macroStyles.protienBGColor]} />
-            <View style={macroStyles.pillTrack} />
+        </View>
+        {/* <Button title="PRES ME" onPress={() => setCurrent(current + 25)} /> */}
+        <CalorieRing current={current} goal={2750} />
+        <View style={macroStyles.container}>
+          <View style={macroStyles.pill}>
+            <Text style={[macroStyles.pillValue, macroStyles.protienTextColor]}>
+              142g
+            </Text>
+            <Text style={macroStyles.pillSubTitle}>PROTEIN</Text>
+            <View>
+              <View style={[macroStyles.pillBar, macroStyles.protienBGColor]} />
+              <View style={macroStyles.pillTrack} />
+            </View>
+          </View>
+          <View style={macroStyles.pill}>
+            <Text style={[macroStyles.pillValue, macroStyles.carbsTextColor]}>
+              186g
+            </Text>
+            <Text style={macroStyles.pillSubTitle}>CARBS</Text>
+            <View>
+              <View style={[macroStyles.pillBar, macroStyles.carbsBGColor]} />
+              <View style={macroStyles.pillTrack} />
+            </View>
+          </View>
+          <View style={macroStyles.pill}>
+            <Text style={[macroStyles.pillValue, macroStyles.fatsTextColor]}>
+              48g
+            </Text>
+            <Text style={macroStyles.pillSubTitle}>FATS</Text>
+            <View>
+              <View style={[macroStyles.pillBar, macroStyles.fatsBGColor]} />
+              <View style={macroStyles.pillTrack} />
+            </View>
           </View>
         </View>
-        <View style={macroStyles.pill}>
-          <Text style={[macroStyles.pillValue, macroStyles.carbsTextColor]}>
-            186g
-          </Text>
-          <Text style={macroStyles.pillSubTitle}>CARBS</Text>
-          <View>
-            <View style={[macroStyles.pillBar, macroStyles.carbsBGColor]} />
-            <View style={macroStyles.pillTrack} />
-          </View>
+        <View>
+          <Text style={mealLogStyles.title}>MEAL LOG</Text>
         </View>
-        <View style={macroStyles.pill}>
-          <Text style={[macroStyles.pillValue, macroStyles.fatsTextColor]}>
-            48g
-          </Text>
-          <Text style={macroStyles.pillSubTitle}>FATS</Text>
-          <View>
-            <View style={[macroStyles.pillBar, macroStyles.fatsBGColor]} />
-            <View style={macroStyles.pillTrack} />
+
+        <View style={{ gap: 24 }}>
+          {/* BREAKFAST MEAL LOG*/}
+          <View style={mealLogStyles.container}>
+            <View style={mealLogStyles.mealContainer}>
+              <Text style={mealLogStyles.mealTitle}>Breakfast</Text>
+              <Text style={mealLogStyles.mealSubTitle}>420 cal</Text>
+            </View>
+            {mockData.map((data, idx) => {
+              return (
+                <View
+                  key={idx}
+                  style={[
+                    mealLogStyles.mealContainer,
+                    idx === mockData.length - 1 && { borderBottomWidth: 0 },
+                  ]}
+                >
+                  <Text style={mealLogStyles.mealTitle}>{data.name}</Text>
+                  <Text style={mealLogStyles.mealSubTitle}>
+                    {data.calories} cal
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+
+          {/* LUNCH MEAL LOG*/}
+          <View style={mealLogStyles.container}>
+            <View style={mealLogStyles.mealContainer}>
+              <Text style={mealLogStyles.mealTitle}>Lunch</Text>
+              <Text style={mealLogStyles.mealSubTitle}>420 cal</Text>
+            </View>
+            {mockData.map((data, idx) => {
+              return (
+                <View
+                  key={idx}
+                  style={[
+                    mealLogStyles.mealContainer,
+                    idx === mockData.length - 1 && { borderBottomWidth: 0 },
+                  ]}
+                >
+                  <Text style={mealLogStyles.mealTitle}>{data.name}</Text>
+                  <Text style={mealLogStyles.mealSubTitle}>
+                    {data.calories} cal
+                  </Text>
+                </View>
+              );
+            })}
+          </View>
+
+          {/* DINNER MEAL LOG*/}
+          <View style={mealLogStyles.container}>
+            <View style={mealLogStyles.mealContainer}>
+              <Text style={mealLogStyles.mealTitle}>Dinner</Text>
+              <Text style={mealLogStyles.mealSubTitle}>420 cal</Text>
+            </View>
+            {mockData.map((data, idx) => {
+              return (
+                <View
+                  key={idx}
+                  style={[
+                    mealLogStyles.mealContainer,
+                    idx === mockData.length - 1 && { borderBottomWidth: 0 },
+                  ]}
+                >
+                  <Text style={mealLogStyles.mealTitle}>{data.name}</Text>
+                  <Text style={mealLogStyles.mealSubTitle}>
+                    {data.calories} cal
+                  </Text>
+                </View>
+              );
+            })}
           </View>
         </View>
       </View>
-      <View>
-        <Text style={mealLogStyles.title}>MEAL LOG</Text>
-      </View>
-      <View>
-        <View style={mealLogStyles.container}>
-          <View style={mealLogStyles.mealContainer}>
-            <Text style={mealLogStyles.mealTitle}>Breakfast</Text>
-            <Text style={mealLogStyles.mealSubTitle}>420 cal</Text>
-          </View>
-          <View style={mealLogStyles.mealContainer}>
-            <Text style={mealLogStyles.mealTitle}>Oatmeal w/ Berries</Text>
-            <Text style={mealLogStyles.mealSubTitle}>320 cal</Text>
-          </View>
-        </View>
-      </View>
-    </View>
+    </ScrollView>
   );
 };
 
 // Layout
 const layoutStyles = StyleSheet.create({
+  root: {
+    backgroundColor: "#161920",
+  },
   mainContainer: {
     backgroundColor: "#161920",
     paddingTop: 80,
+    paddingBottom: 80,
     paddingHorizontal: 30,
     flex: 1,
     width: "100%",
